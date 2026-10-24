@@ -67,6 +67,7 @@ def check_login(email, pw_hash):
     req.add_header("AuthAccountPassword", "")
 
     try:
+        # nosemgrep: python.lang.security.audit.dynamic-urllib-use-detected.dynamic-urllib-use-detected -- the URL is the fixed https API constant plus urlencoded query values
         with urllib.request.urlopen(req, timeout=30) as r:
             data = json.loads(r.read())
     except urllib.error.URLError as e:
